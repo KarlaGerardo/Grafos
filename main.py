@@ -2,13 +2,14 @@ from math import sqrt
 import numpy as np
 from nodo import Nodo
 from arista import Arista
-from random import randint
+from random import randint, random
 from random import random as rd
 import matplotlib.pyplot as plt
 from random import shuffle
 from BFS import BFS
 from DFS_R import DFS_R
 from DFS_I import DFS_I
+from Dijkstra import Dijkstra
 #C:\Users\karla\OneDrive\CIC\B21\Diseño y Análisis\Proyecto 1
 #dot -Tpng grafoN.gv -o wp.png
 
@@ -67,11 +68,13 @@ class grafo:
                 if j<(columnas-1):
                     segundoV=vP[i,j+1]
                     if dirigido==1:
-                        vectorUnidoMalla=Arista(primerV,segundoV)
+                        peso=randint(1,100)
+                        vectorUnidoMalla=Arista(primerV,segundoV,peso)
                         aristasNodosMalla.append(vectorUnidoMalla.concatenarD())
                         file.write(vectorUnidoMalla.concatenarD()+";\n") 
                     elif dirigido==0:
-                        vectorUnidoMalla=Arista(primerV,segundoV)
+                        peso=randint(1,100)
+                        vectorUnidoMalla=Arista(primerV,segundoV,peso)
                         aristasNodosMalla.append(vectorUnidoMalla.concatenar())
                         file.write(vectorUnidoMalla.concatenar()+";\n") 
         
@@ -82,24 +85,27 @@ class grafo:
                 if k<(filas-1):
                     segundoV=vP[k+1,l]
                     if dirigido==1:
-                        vectorUnidoMalla=Arista(primerV,segundoV)
+                        peso=randint(1,100)
+                        vectorUnidoMalla=Arista(primerV,segundoV,peso)
                         aristasNodosMalla.append(vectorUnidoMalla.concatenarD())
                         file.write(vectorUnidoMalla.concatenarD()+";\n") 
                     elif dirigido==0:
-                        vectorUnidoMalla=Arista(primerV,segundoV)
+                        peso=randint(1,100)
+                        vectorUnidoMalla=Arista(primerV,segundoV,peso)
                         aristasNodosMalla.append(vectorUnidoMalla.concatenar())
                         file.write(vectorUnidoMalla.concatenar()+";\n")
 
         file.write("}")
         file.close()
-        p=BFS('grafoMalla.gv',"id_1")
-        p.ModeloBFS()
-        s=DFS_R('grafoMalla.gv',"id_1")
-        s.ModeloDFSR()
-        r=DFS_I('grafoMalla.gv',"id_1")
-        r.ModeloDFSI()
-
-       
+        #p=BFS('grafoMalla.gv',"id_1")
+        #p.ModeloBFS()
+        #s=DFS_R('grafoMalla.gv',"id_1")
+        #s.ModeloDFSR()
+        #r=DFS_I('grafoMalla.gv',"id_1")
+        #r.ModeloDFSI()
+        q=Dijkstra('grafoMalla.gv',"id_1")
+        q.Dijkstra()
+        
     """
     A continuación se presenta el modelo Gn,m de Erdon Renyi------------------------------------------------------
     """
@@ -135,10 +141,12 @@ class grafo:
             if (primerV!=segundoV):
                 #Para cuando no es dirigido
                 if dirigido==0:
-                    vectorUnido=Arista(primerV,segundoV) #Aquí entra la clase arista
+                    peso=randint(1,100)
+                    vectorUnido=Arista(primerV,segundoV,peso) #Aquí entra la clase arista
                     comprobar=vectorUnido.concatenar()
                     if comprobar not in aristasNodos:
-                        vectorCUnido=Arista(segundoV,primerV)
+                        peso=randint(1,100)
+                        vectorCUnido=Arista(segundoV,primerV,peso)
                         comprobar2=vectorCUnido.concatenar()
                         if comprobar2 not in aristasNodos:
                             aristasNodos.append(vectorUnido.concatenar())
@@ -147,7 +155,8 @@ class grafo:
                             t=t+1
                 #Para cuando es dirigido
                 elif dirigido==1:
-                    vectorUnido=Arista(primerV,segundoV)
+                    peso=randint(1,100)
+                    vectorUnido=Arista(primerV,segundoV,peso)
                     comprobar=vectorUnido.concatenarD()
                     if comprobar not in aristasNodos:
                         aristasNodos.append(vectorUnido.concatenarD())
@@ -155,10 +164,12 @@ class grafo:
                         t=t+1
             elif autociclado==1:
                 if dirigido==0:
-                    vectorUnido=Arista(primerV,segundoV) #Aquí entra la clase arista
+                    peso=randint(1,100)
+                    vectorUnido=Arista(primerV,segundoV,peso) #Aquí entra la clase arista
                     comprobar=vectorUnido.concatenar()
                     if comprobar not in aristasNodos:
-                        vectorCUnido=Arista(segundoV,primerV)
+                        peso=randint(1,100)
+                        vectorCUnido=Arista(segundoV,primerV,peso)
                         comprobar2=vectorUnido.concatenar()
                         if comprobar2 not in aristasNodos:
                             aristasNodos.append(vectorUnido.concatenar())
@@ -166,7 +177,8 @@ class grafo:
                             t=t+1
                 #Para cuando es dirigido
                 elif dirigido==1:
-                    vectorUnido=Arista(primerV,segundoV)
+                    peso=randint(1,100)
+                    vectorUnido=Arista(primerV,segundoV,peso)
                     comprobar=vectorUnido.concatenarD()
                     if comprobar not in aristasNodos:
                         aristasNodos.append(vectorUnido.concatenarD())
@@ -176,12 +188,14 @@ class grafo:
         file.write("}")
         file.close()
         
-        p=BFS('grafoErdosRenyi.gv',"id_1")
-        p.ModeloBFS()
-        m=DFS_R('grafoErdosRenyi.gv','id_1')
-        m.ModeloDFSR()
-        r=DFS_I('grafoErdosRenyi.gv','id_1')
-        r.ModeloDFSI()
+        #p=BFS('grafoErdosRenyi.gv',"id_1")
+        #p.ModeloBFS()
+        #m=DFS_R('grafoErdosRenyi.gv','id_1')
+        #m.ModeloDFSR()
+        #r=DFS_I('grafoErdosRenyi.gv','id_1')
+        #r.ModeloDFSI()
+        q=Dijkstra('grafoErdosRenyi.gv',"id_1")
+        q.Dijkstra()
 
     """
     A continuación se presenta el modelo Gn,p de Gilbert-----------------------------------------------------------
@@ -217,9 +231,11 @@ class grafo:
                         if (primerV!=segundoV): #Para evitar autociclos
                             probabilidad_Random=randint(0,100)
                             if probabilidad_Gilbert>=probabilidad_Random:
-                                vectorUnidoGilbert=Arista(primerV,segundoV)
+                                peso=randint(1,100)
+                                vectorUnidoGilbert=Arista(primerV,segundoV,peso)
                                 comprobar1G=vectorUnidoGilbert.concatenar()
-                                comprobar2G=Arista(segundoV,primerV)
+                                peso=randint(1,100)
+                                comprobar2G=Arista(segundoV,primerV,peso)
                                 comprobar2G1=comprobar2G.concatenar()
                                 if comprobar1G  not in aristasNodosGilbert:
                                         if comprobar2G1 not in aristasNodosGilbert:
@@ -228,9 +244,11 @@ class grafo:
                     elif autociclado==1:
                         probabilidad_Random=randint(0,100)
                         if probabilidad_Gilbert>=probabilidad_Random:
-                            vectorUnidoGilbert=Arista(primerV,segundoV)
+                            peso=randint(1,100)
+                            vectorUnidoGilbert=Arista(primerV,segundoV,peso)
                             comprobar1G=vectorUnidoGilbert.concatenar()
-                            comprobar2G=Arista(segundoV,primerV)
+                            peso=randint(1,100)
+                            comprobar2G=Arista(segundoV,primerV,peso)
                             comprobar2G1=comprobar2G.concatenar()
                             if comprobar1G not in aristasNodosGilbert:
                                 if comprobar2G1 not in aristasNodosGilbert:
@@ -243,34 +261,38 @@ class grafo:
                     segundoV=vectorNodos[s]
                     if autociclado==0:
                         if (primerV!=segundoV):
-                            comprobar1G=Arista(primerV,segundoV)
+                            peso=randint(1,100)
+                            comprobar1G=Arista(primerV,segundoV,peso)
                             if comprobar1G not in aristasNodosGilbert:
                                 probabilidad_Random=randint(0,100)
                                 if probabilidad_Gilbert>=probabilidad_Random:
-                                    vectorUnidoGilbert=Arista(primerV,segundoV)
+                                    peso=randint(1,100)
+                                    vectorUnidoGilbert=Arista(primerV,segundoV,peso)
                                     aristasNodosGilbert.append(vectorUnidoGilbert.concatenarD())
                                     file.write(vectorUnidoGilbert.concatenarD()+";\n")
                     elif autociclado==1:
-                        comprobar1G=Arista(primerV,segundoV)
+                        peso=randint(1,100)
+                        comprobar1G=Arista(primerV,segundoV,peso)
                         if comprobar1G not in aristasNodosGilbert:
                             probabilidad_Random=randint(0,100)
                             if probabilidad_Gilbert>=probabilidad_Random:
-                                vectorUnidoGilbert=Arista(primerV,segundoV)
+                                peso=randint(1,100)
+                                vectorUnidoGilbert=Arista(primerV,segundoV,peso)
                                 aristasNodosGilbert.append(vectorUnidoGilbert.concatenarD())
                                 file.write(vectorUnidoGilbert.concatenarD()+";\n")
 
         file.write("}")
         file.close()
 
-        p=BFS('grafoGilbert.gv',"id_1")
-        p.ModeloBFS()
-        n=DFS_R('grafoGilbert.gv',"id_1")
-        n.ModeloDFSR()
-        r=DFS_I('grafoGilbert.gv',"id_1")
-        r.ModeloDFSI()
-
-
-
+        #p=BFS('grafoGilbert.gv',"id_1")
+        #p.ModeloBFS()
+        #n=DFS_R('grafoGilbert.gv',"id_1")
+        #n.ModeloDFSR()
+        #r=DFS_I('grafoGilbert.gv',"id_1")
+        #r.ModeloDFSI()
+        m=Dijkstra('grafoGilbert.gv',"id_1")
+        m.Dijkstra()
+        
     """
     A continuación se presenta el modelo Gn,r geográfico simple-----------------------------------------------------
     """
@@ -345,12 +367,14 @@ class grafo:
         file.write("}")
         file.close()
 
-        p=BFS('grafoGeografico.gv',"id_1")
-        p.ModeloBFS()
-        o=DFS_R('grafoGeografico.gv',"id_1")
-        o.ModeloDFSR()
-        n=DFS_I('grafoGeografico.gv',"id_1")
-        n.ModeloDFSI()
+        #p=BFS('grafoGeografico.gv',"id_1")
+        #p.ModeloBFS()
+        #o=DFS_R('grafoGeografico.gv',"id_1")
+        #o.ModeloDFSR()
+        #n=DFS_I('grafoGeografico.gv',"id_1")
+        #n.ModeloDFSI()
+        m=Dijkstra('grafoGeografico.gv',"id_1")
+        m.Dijkstra()
 
     """
     A continuación se presental el modelo Gn,d Barabási-Albert------------------------------------------------------
@@ -399,43 +423,47 @@ class grafo:
                     if autociclado==0:
                         if segundoV!=primerV:
                             if dirigido==0:
-                                vectorUnidoBarabasiAlbert=Arista(primerV,segundoV)
-                                vectorUnidoBarabasiAlbert2=Arista(segundoV,primerV)
+                                peso=randint(1,100)
+                                vectorUnidoBarabasiAlbert=Arista(primerV,segundoV,peso)
+                                vectorUnidoBarabasiAlbert2=Arista(segundoV,primerV,peso)
                                 a=vectorUnidoBarabasiAlbert.concatenar()
                                 b=vectorUnidoBarabasiAlbert2.concatenar()
                                 if a not in aristasNodos:
                                     if b not in aristasNodos:
                                         aristasNodos.append(vectorUnidoBarabasiAlbert.concatenar())
-                                        file.write(vectorUnidoBarabasiAlbert.name()+";\n")
+                                        file.write(vectorUnidoBarabasiAlbert.concatenar()+";\n")
                             elif dirigido==1:
-                                vectorUnidoBarabasiAlbert=Arista(primerV,segundoV)
-                                vectorUnidoBarabasiAlbert2=Arista(segundoV,primerV)
+                                peso=randint(1,100)
+                                vectorUnidoBarabasiAlbert=Arista(primerV,segundoV,peso)
+                                vectorUnidoBarabasiAlbert2=Arista(segundoV,primerV,peso)
                                 a=vectorUnidoBarabasiAlbert.concatenarD()
                                 b=vectorUnidoBarabasiAlbert2.concatenarD()
                                 if a not in aristasNodos:
                                     if b not in aristasNodos:
                                         aristasNodos.append(vectorUnidoBarabasiAlbert.concatenarD())
-                                        file.write(vectorUnidoBarabasiAlbert.nameD()+";\n")
+                                        file.write(vectorUnidoBarabasiAlbert.concatenarD()+";\n")
                         contadorConexiones=contadorConexiones+1
                     elif autociclado==1:
                         if dirigido==0:
-                            vectorUnidoBarabasiAlbert=Arista(primerV,segundoV)
-                            vectorUnidoBarabasiAlbert2=Arista(segundoV,primerV)
+                            peso=randint(1,100)
+                            vectorUnidoBarabasiAlbert=Arista(primerV,segundoV,peso)
+                            vectorUnidoBarabasiAlbert2=Arista(segundoV,primerV,peso)
                             a=vectorUnidoBarabasiAlbert.concatenar()
                             b=vectorUnidoBarabasiAlbert2.concatenar()
                             if a not in aristasNodos:
                                 if b not in aristasNodos:
                                     aristasNodos.append(vectorUnidoBarabasiAlbert.concatenar())
-                                    file.write(vectorUnidoBarabasiAlbert.name()+";\n")
+                                    file.write(vectorUnidoBarabasiAlbert.concatenar()+";\n")
                         elif dirigido==1:
-                            vectorUnidoBarabasiAlbert=Arista(primerV,segundoV)
-                            vectorUnidoBarabasiAlbert2=Arista(segundoV,primerV)
+                            peso=randint(1,100)
+                            vectorUnidoBarabasiAlbert=Arista(primerV,segundoV,peso)
+                            vectorUnidoBarabasiAlbert2=Arista(segundoV,primerV,peso)
                             a=vectorUnidoBarabasiAlbert.concatenarD()
                             b=vectorUnidoBarabasiAlbert2.concatenarD()
                             if a not in aristasNodos:
                                 if b not in aristasNodos:
                                     aristasNodos.append(vectorUnidoBarabasiAlbert.concatenarD())
-                                    file.write(vectorUnidoBarabasiAlbert.nameD()+";\n")
+                                    file.write(vectorUnidoBarabasiAlbert.concatenarD()+";\n")
                         contadorConexiones=contadorConexiones+1
             contadorConexiones=0
         
@@ -443,12 +471,14 @@ class grafo:
         file.write("}")
         file.close()
 
-        p=BFS('grafoBarabasiAlbert.gv',"id_1")
-        p.ModeloBFS()
-        q=DFS_R('grafoBarabasiAlbert.gv',"id_1")
-        q.ModeloDFSR()
-        n=DFS_I('grafoBarabasiAlbert.gv',"id_1")
-        n.ModeloDFSI() 
+        #p=BFS('grafoBarabasiAlbert.gv',"id_1")
+        #p.ModeloBFS()
+        #q=DFS_R('grafoBarabasiAlbert.gv',"id_1")
+        #q.ModeloDFSR()
+        #n=DFS_I('grafoBarabasiAlbert.gv',"id_1")
+        #n.ModeloDFSI() 
+        m=Dijkstra('grafoBarabasiAlbert.gv',"id_1")
+        m.Dijkstra()
 
 
     """
@@ -488,56 +518,61 @@ class grafo:
             for k in range(j+1,n+1):
                 segundoV=vectorNodos[k]
                 if dirigido==1:
-                    vectorUnidoDorogovtsevMendes=Arista(primerV,segundoV)
+                    peso=randint(1,100)
+                    vectorUnidoDorogovtsevMendes=Arista(primerV,segundoV,peso)
                     aristasNodos.append(vectorUnidoDorogovtsevMendes.concatenarD())
                     nodo1aris.append(vectorUnidoDorogovtsevMendes.nodo1Arista())
                     nodo2aris.append(vectorUnidoDorogovtsevMendes.nodo2Arista())
-                    file.write(vectorUnidoDorogovtsevMendes.nameD()+";\n")
+                    file.write(vectorUnidoDorogovtsevMendes.concatenarD()+";\n")
                 elif dirigido==0:
-                    vectorUnidoDorogovtsevMendes=Arista(primerV,segundoV)
+                    peso=randint(1,100)
+                    vectorUnidoDorogovtsevMendes=Arista(primerV,segundoV,peso)
                     aristasNodos.append(vectorUnidoDorogovtsevMendes.concatenar())
                     nodo1aris.append(vectorUnidoDorogovtsevMendes.nodo1Arista())
                     nodo2aris.append(vectorUnidoDorogovtsevMendes.nodo2Arista())
-                    file.write(vectorUnidoDorogovtsevMendes.name()+";\n")
+                    file.write(vectorUnidoDorogovtsevMendes.concatenar()+";\n")
         tam=3 #Siempre será el tamaño inicial del vector aristas
         #Escoger arista en 3D
         for l in range(3,nod3): 
             c=randint(0,tam-1)
             primerV=nodo1aris[c]
             segundoV=vectorNodos[l]
-            vectorUnidoDorogovtsevMendes=Arista(primerV,segundoV)
+            peso=randint(1,100)
+            vectorUnidoDorogovtsevMendes=Arista(primerV,segundoV,peso)
             if dirigido==1:
                 aristasNodos.append(vectorUnidoDorogovtsevMendes.concatenarD())
                 nodo1aris.append(vectorUnidoDorogovtsevMendes.nodo1Arista())
                 nodo2aris.append(vectorUnidoDorogovtsevMendes.nodo2Arista())
-                file.write(vectorUnidoDorogovtsevMendes.nameD()+";\n")
+                file.write(vectorUnidoDorogovtsevMendes.concatenarD()+";\n")
             elif dirigido==0:
                 aristasNodos.append(vectorUnidoDorogovtsevMendes.concatenar())
                 nodo1aris.append(vectorUnidoDorogovtsevMendes.nodo1Arista())
                 nodo2aris.append(vectorUnidoDorogovtsevMendes.nodo2Arista())
-                file.write(vectorUnidoDorogovtsevMendes.name()+";\n")
+                file.write(vectorUnidoDorogovtsevMendes.concatenar()+";\n")
             primer2V=nodo2aris[c]
             vectorUnidoDorogovtsevMendes2=Arista(primer2V,segundoV)
             if dirigido==1:
                 aristasNodos.append(vectorUnidoDorogovtsevMendes2.concatenarD())
                 nodo1aris.append(vectorUnidoDorogovtsevMendes2.nodo1Arista())
                 nodo2aris.append(vectorUnidoDorogovtsevMendes2.nodo2Arista())
-                file.write(vectorUnidoDorogovtsevMendes2.nameD()+";\n")
+                file.write(vectorUnidoDorogovtsevMendes2.concatenarD()+";\n")
             elif dirigido==0:
                 aristasNodos.append(vectorUnidoDorogovtsevMendes2.concatenar())
                 nodo1aris.append(vectorUnidoDorogovtsevMendes2.nodo1Arista())
                 nodo2aris.append(vectorUnidoDorogovtsevMendes2.nodo2Arista())
-                file.write(vectorUnidoDorogovtsevMendes2.name()+";\n")
+                file.write(vectorUnidoDorogovtsevMendes2.concatenar()+";\n")
             tam=tam+1  
         file.write("}")
         file.close()
 
-        p=BFS('grafoDorogovtsevMendes.gv',"id_1")
-        p.ModeloBFS()
-        r=DFS_R('grafoDorogovtsevMendes.gv',"id_1")
-        r.ModeloDFSR()
-        n=DFS_I('grafoDorogovtsevMendes.gv',"id_1")
-        n.ModeloDFSI() 
+        #p=BFS('grafoDorogovtsevMendes.gv',"id_1")
+        #p.ModeloBFS()
+        #r=DFS_R('grafoDorogovtsevMendes.gv',"id_1")
+        #r.ModeloDFSR()
+        #n=DFS_I('grafoDorogovtsevMendes.gv',"id_1")
+        #n.ModeloDFSI() 
+        q=Dijkstra('grafoDorogovtsevMendes.gv',"id_1")
+        q.Dijkstra()
 
         
 f=grafo()

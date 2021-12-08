@@ -6,10 +6,9 @@ from random import randint, random
 from random import random as rd
 import matplotlib.pyplot as plt
 from random import shuffle
-from BFS import BFS
-from DFS_R import DFS_R
-from DFS_I import DFS_I
-from Dijkstra import Dijkstra
+from KruskalDirecto import KruskalDirecto
+from KruskalInverso import KruskalInversoS
+from PRIM import NodosConectados
 #C:\Users\karla\OneDrive\CIC\B21\Diseño y Análisis\Proyecto 1
 #dot -Tpng grafoN.gv -o wp.png
 
@@ -103,8 +102,14 @@ class grafo:
         #s.ModeloDFSR()
         #r=DFS_I('grafoMalla.gv',"id_1")
         #r.ModeloDFSI()
-        q=Dijkstra('grafoMalla.gv',"id_1")
-        q.Dijkstra()
+        #q=Dijkstra('grafoMalla.gv',"id_1")
+        #q.Dijkstra()
+        p=KruskalDirecto('grafoMalla.gv')
+        p.KrusalDirecto()
+        q=KruskalInversoS('grafoMalla.gv')
+        q.IdentificarAristasKI()
+        r=NodosConectados('grafoMalla.gv')
+        r.IdentificarAristas()
         
     """
     A continuación se presenta el modelo Gn,m de Erdon Renyi------------------------------------------------------
@@ -194,8 +199,14 @@ class grafo:
         #m.ModeloDFSR()
         #r=DFS_I('grafoErdosRenyi.gv','id_1')
         #r.ModeloDFSI()
-        q=Dijkstra('grafoErdosRenyi.gv',"id_1")
-        q.Dijkstra()
+        #q=Dijkstra('grafoErdosRenyi.gv',"id_1")
+        #q.Dijkstra()
+        p=KruskalDirecto('grafoErdosRenyi.gv')
+        p.KrusalDirecto()
+        q=KruskalInversoS('grafoErdosRenyi.gv')
+        q.IdentificarAristasKI()
+        r=NodosConectados('grafoErdosRenyi.gv')
+        r.IdentificarAristas()
 
     """
     A continuación se presenta el modelo Gn,p de Gilbert-----------------------------------------------------------
@@ -290,9 +301,14 @@ class grafo:
         #n.ModeloDFSR()
         #r=DFS_I('grafoGilbert.gv',"id_1")
         #r.ModeloDFSI()
-        m=Dijkstra('grafoGilbert.gv',"id_1")
-        m.Dijkstra()
-        
+        #m=Dijkstra('grafoGilbert.gv',"id_1")
+        #m.Dijkstra()
+        p=KruskalDirecto('grafoGilbert.gv')
+        p.KrusalDirecto()
+        q=KruskalInversoS('grafoGilbert.gv')
+        q.IdentificarAristasKI()
+        r=NodosConectados('grafoGilbert.gv')
+        r.IdentificarAristas()
     """
     A continuación se presenta el modelo Gn,r geográfico simple-----------------------------------------------------
     """
@@ -338,11 +354,11 @@ class grafo:
                     distancia=sqrt((nodocordenadaX2-nodocordenadaX)**2+(nodoCordenadaY2-nodoCordenadaY)**2)
                     if distancia<=r:
                         if dirigido==1:
-                            vectorUnidoGeografico=Arista(nodoSeleccionado,nodoMedido,distancia)
+                            vectorUnidoGeografico=Arista(nodoSeleccionado,nodoMedido,int(distancia*100))
                             aristasNodosGeografico.append(vectorUnidoGeografico.concatenarD())
                             file.write(vectorUnidoGeografico.concatenarD()+";\n")
                         if dirigido==0:
-                            vectorUnidoGeografico=Arista(nodoSeleccionado,nodoMedido,distancia)
+                            vectorUnidoGeografico=Arista(nodoSeleccionado,nodoMedido,int(distancia*100))
                             aristasNodosGeografico.append(vectorUnidoGeografico.concatenar())
                             file.write(vectorUnidoGeografico.concatenar()+";\n")
             elif autociclado==1:
@@ -373,8 +389,14 @@ class grafo:
         #o.ModeloDFSR()
         #n=DFS_I('grafoGeografico.gv',"id_1")
         #n.ModeloDFSI()
-        m=Dijkstra('grafoGeografico.gv',"id_1")
-        m.Dijkstra()
+        #m=Dijkstra('grafoGeografico.gv',"id_1")
+        #m.Dijkstra()
+        p=KruskalDirecto('grafoGeografico.gv')
+        p.KrusalDirecto()
+        q=KruskalInversoS('grafoGeografico.gv')
+        q.IdentificarAristasKI()
+        r=NodosConectados('grafoGeografico.gv')
+        r.IdentificarAristas()
 
     """
     A continuación se presental el modelo Gn,d Barabási-Albert------------------------------------------------------
@@ -477,8 +499,14 @@ class grafo:
         #q.ModeloDFSR()
         #n=DFS_I('grafoBarabasiAlbert.gv',"id_1")
         #n.ModeloDFSI() 
-        m=Dijkstra('grafoBarabasiAlbert.gv',"id_1")
-        m.Dijkstra()
+        #m=Dijkstra('grafoBarabasiAlbert.gv',"id_1")
+        #m.Dijkstra()
+        p=KruskalDirecto('grafoBarabasiAlbert.gv')
+        p.KrusalDirecto()
+        q=KruskalInversoS('grafoBarabasiAlbert.gv')
+        q.IdentificarAristasKI()
+        r=NodosConectados('grafoBarabasiAlbert.gv')
+        r.IdentificarAristas()
 
 
     """
@@ -571,13 +599,19 @@ class grafo:
         #r.ModeloDFSR()
         #n=DFS_I('grafoDorogovtsevMendes.gv',"id_1")
         #n.ModeloDFSI() 
-        q=Dijkstra('grafoDorogovtsevMendes.gv',"id_1")
-        q.Dijkstra()
+        #q=Dijkstra('grafoDorogovtsevMendes.gv',"id_1")
+        #q.Dijkstra()
+        p=KruskalDirecto('grafoDorogovtsevMendes.gv')
+        p.KrusalDirecto()
+        q=KruskalInversoS('grafoDorogovtsevMendes.gv')
+        q.IdentificarAristasKI()
+        r=NodosConectados('grafoDorogovtsevMendes.gv')
+        r.IdentificarAristas()
 
         
 f=grafo()
 f.grafoMalla(columnas,filas,dirigido)
-f.grafoErdosRenyi(nod,m,dirigido,autociclado)
+#f.grafoErdosRenyi(nod,m,dirigido,autociclado)
 f.grafoGilbert(nod,probabilidad_Gilbert,dirigido,autociclado)
 f.grafoGeografico(nod,r,dirigido,autociclado)
 f.grafoBarabasiAlbert(nod,d,dirigido,autociclado)

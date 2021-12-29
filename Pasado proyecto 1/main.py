@@ -1,14 +1,14 @@
 from math import sqrt
 import numpy as np
-from DFS_R import DFS_R
+#from DFS_R import DFS_R
 from nodo import Nodo
 from arista import Arista
 from random import randint
 from random import random as rd
 import matplotlib.pyplot as plt
 from random import shuffle
-from BFS import BFS
-from DFS_I import DFS_I
+#from BFS import BFS
+#from DFS_I import DFS_I
 
 #C:\Users\karla\OneDrive\CIC\B21\Diseño y Análisis\Proyecto 1
 #dot -Tpng grafoN.gv -o wp.png
@@ -93,14 +93,14 @@ class grafo:
 
         file.write("}")
         file.close()
-        p=BFS('grafoMalla.gv',"id_1")
+        """p=BFS('grafoMalla.gv',"id_1")
         p.ModeloBFS()
 
         m=DFS_I('grafoMalla.gv','id_1')    
         m.ModeloDFS_I()
 
         mm=DFS_R('grafoMalla.gv','id_1')    
-        mm.ModeloDFSR()
+        mm.ModeloDFSR()"""
         
     """
     A continuación se presenta el modelo Gn,m de Erdon Renyi------------------------------------------------------
@@ -178,14 +178,14 @@ class grafo:
         file.write("}")
         file.close()
         
-        p=BFS('grafoErdosRenyi.gv',"id_1")
+        """p=BFS('grafoErdosRenyi.gv',"id_1")
         p.ModeloBFS()
 
         m=DFS_I('grafoErdosRenyi.gv','id_1')    
         m.ModeloDFS_I()
 
         mm=DFS_R('grafoErdosRenyi.gv','id_1')    
-        mm.ModeloDFSR()
+        mm.ModeloDFSR()"""
     """
     A continuación se presenta el modelo Gn,p de Gilbert-----------------------------------------------------------
     """
@@ -265,14 +265,14 @@ class grafo:
         file.write("}")
         file.close()
 
-        p=BFS('grafoGilbert.gv',"id_1")
+        """p=BFS('grafoGilbert.gv',"id_1")
         p.ModeloBFS()
 
         m=DFS_I('grafoGilbert.gv','id_1')    
         m.ModeloDFS_I()
 
         mm=DFS_R('grafoGilbert.gv','id_1')    
-        mm.ModeloDFSR()
+        mm.ModeloDFSR()"""
     """
     A continuación se presenta el modelo Gn,r geográfico simple-----------------------------------------------------
     """
@@ -347,14 +347,14 @@ class grafo:
         file.write("}")
         file.close()
 
-        p=BFS('grafoGeografico.gv',"id_1")
+        """p=BFS('grafoGeografico.gv',"id_1")
         p.ModeloBFS()
 
         m=DFS_I('grafoGeografico.gv','id_1')    
         m.ModeloDFS_I()
 
         mm=DFS_R('grafoGeografico.gv','id_1')    
-        mm.ModeloDFSR()
+        mm.ModeloDFSR()"""
     """
     A continuación se presental el modelo Gn,d Barabási-Albert------------------------------------------------------
     Colocar n nodos uno por uno, asignando a cada uno d aristas a vértices------------------------------------------
@@ -446,14 +446,14 @@ class grafo:
         file.write("}")
         file.close()
 
-        p=BFS('grafoBarabasiAlbert.gv',"id_1")
+        """p=BFS('grafoBarabasiAlbert.gv',"id_1")
         p.ModeloBFS()
 
         m=DFS_I('grafoBarabasiAlbert.gv','id_1')    
         m.ModeloDFS_I()
 
         mm=DFS_R('grafoBarabasiAlbert.gv','id_1')    
-        mm.ModeloDFSR()
+        mm.ModeloDFSR()"""
     """
     A continuación se muestra el modelo Gn Dorogovtsev-Mendes-------------------------------------------------------
     Crear 3 nodos y 3 aristas formando un triángulo-----------------------------------------------------------------
@@ -535,14 +535,14 @@ class grafo:
         file.write("}")
         file.close()
 
-        p=BFS('grafoDorogovtsevMendes.gv',"id_1")
+        """p=BFS('grafoDorogovtsevMendes.gv',"id_1")
         p.ModeloBFS()
 
         m=DFS_I('grafoDorogovtsevMendes.gv','id_1')    
         m.ModeloDFS_I()
 
         mm=DFS_R('grafoDorogovtsevMendes.gv','id_1')    
-        mm.ModeloDFSR()
+        mm.ModeloDFSR()"""
         
 f=grafo()
 f.grafoMalla(columnas,filas,dirigido)

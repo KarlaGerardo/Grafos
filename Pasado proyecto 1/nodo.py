@@ -7,7 +7,7 @@ class Nodo:
     
     def name(self):
         a=str(self.iden)
-        return 'id_'+ self.ide + "[label="+'id_'+self.ide+"]"
+        return 'id_'+ self.ide #+ "[label="+'id_'+self.ide+"]"
 
 
 #n=Nodo('1')

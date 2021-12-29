@@ -15,9 +15,10 @@ class Arista:
         return self.nodo1 + '->' + self.nodo2 + "[label="+a+"]"#+"weight="+a+"]"
     
     def name(self):
-        a=str(self.nodo1)
+        a=str(self.peso)
+        #a=str(self.nodo1)
         b=str(self.nodo2)
-        return self.nodo1 + '--' + self.nodo2 + "[label="+a+"--"+b+"]"
+        return self.nodo1 + '--' + self.nodo2 + "[label="+a+"]"#"[label="+a+"--"+b+"]"
         
     def nodo1Arista(self):
         return self.nodo1
